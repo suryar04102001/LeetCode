@@ -1,0 +1,20 @@
+class Solution {
+  public int coinCount(int[] coins, int target, int sum, int pos) {
+    if (sum == target) return 0;
+    if (sum > target || pos >= coins.length)
+        return 10007;
+
+    int include = 1 + coinCount(coins, target, sum + coins[pos], pos); // Increment pos here
+    int exclude = coinCount(coins, target, sum, pos + 1);
+    return Math.min(include, exclude);
+}
+
+    
+    
+    public int coinChange(int[] coins, int amount) {
+        if(amount==0) return 0;
+        int n=coinCount(coins,amount,0,0);
+        return (n!=10007)?n:-1;
+        
+    }
+}
